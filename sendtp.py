@@ -6,6 +6,7 @@ import json
 base_url = 'https://api.typingdna.com'
 apiKey = os.getenv('tpkey')
 apiSecret = os.getenv('tpsecret')
+print(apiKey)
 
 
 def send_typing_data(user_id, pattern):
