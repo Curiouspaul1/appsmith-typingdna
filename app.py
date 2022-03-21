@@ -58,3 +58,5 @@ def twofa():
     return render_template('index.html', user_tid=user_tid)
 
 
+if __name__ == '__main__':
+    app.run()
