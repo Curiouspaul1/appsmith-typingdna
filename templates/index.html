@@ -17,8 +17,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       var name = JSON.parse('{{ user_tid | tojson }}');
-      console.log("hey");
-      console.log(localStorage);
       console.log(name);
       localStorage.setItem('user_tid', name);
     </script>

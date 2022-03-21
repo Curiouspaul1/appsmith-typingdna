@@ -36,7 +36,7 @@ function sendPattern(text){
           alert(
             "In order to verify your identity, you will be required to fill this form a couple of times."
           );
-          document.location.href = document.location.href; // reloads iframe
+          // document.location.href = document.location.href; // reloads iframe
         } else {
           if (data.result == 1) {
             alert(
