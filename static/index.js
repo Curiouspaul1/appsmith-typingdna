@@ -41,7 +41,6 @@ function sendPattern(text){
             alert(
               "TypingDNA indicated that there was HIGH confidence in your login pattern"
             );
-            window.location.href = "https://google.com";
             window.parent.postMessage('Verified', '*');
           } else {
             alert(

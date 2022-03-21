@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
+from werkzeug.security import check_password_hash
 from dotenv import load_dotenv
 from flask_cors import CORS
 from sendtp import send_typing_data
@@ -43,6 +44,28 @@ def register():
             'status': 'error',
             'msg': 'User with email {} already exists'.format(data['email'])
         }, 400
+
+@app.route('/sign-in', methods=['POST'])
+def login():
+    global user_tid
+    data = request.get_json(force=True)
+    # find user
+    user = User.query.filter_by(email=data['email']).first()
+    if not user:
+        return {
+            'status': 'error',
+            'msg': f"No user with email {data['email']}"
+        }, 400
+    if not check_password_hash(user.password, data['password']):
+        return {
+            'status': 'error',
+            'msg': f"Password incorrect"
+        }, 401
+    user_tid = user.typing_id
+    return {
+        'status': 'success',
+        'msg': 'Logged in successful'
+    }, 200
 
 @app.route('/sendtypingdata', methods=['POST'])
 def sendtypingdata():
