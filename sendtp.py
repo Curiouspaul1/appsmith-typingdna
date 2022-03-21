@@ -12,7 +12,7 @@ def send_typing_data(user_id, pattern):
     print(user_id)
     print(pattern)
     authstring = f"{apiKey}:{apiSecret}"
-    base64string = base64.decodebytes(
+    base64string = base64.encodestring(
         authstring.encode()).decode().replace('\n', '')
     data = urllib.parse.urlencode({'tp': pattern})
     url = f'{base_url}/auto/{user_id}'
