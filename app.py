@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from dotenv import load_dotenv
-from pyngrok import ngrok, conf
 from flask_cors import CORS
 from sendtp import send_typing_data
 import os
@@ -15,30 +14,14 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{base_dir}/database.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.getenv('secret')
-app.config['START_NGROK'] = True
 CORS(app)
 
 db = SQLAlchemy(app)
 from models import *
 db.create_all()
 
-
-conf.get_default().region = "eu"
-conf.get_default().auth_token = os.getenv('ngtoken')
-
-ngrok.kill()
 url = ''
 user_tid = ''
-
-def start_ngrok():
-    global url
-    os.environ['FLASK_ENV'] = 'production'
-    url = ngrok.connect(5000).public_url
-    print(' * Tunnel URL:', url)
-
-if app.config['START_NGROK']:
-    start_ngrok()
-
 
 @app.route('/sign-up', methods=['POST'])
 def register():
