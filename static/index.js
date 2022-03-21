@@ -3,15 +3,15 @@ import { TypingDNA } from "./typingdna.js";
 const tdna = new TypingDNA();
 
 const typingPatternsButton = document.getElementById("typing-patterns-btn");
-const email = document.getElementById("email").value;
-const password = document.getElementById("password").value;
+const email = document.getElementById("email");
+const password = document.getElementById("password");
 
 const getCookieValue = (name) => (
     document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
 )
 
 typingPatternsButton.addEventListener("click", () => {
-    const text = email + password;
+    const text = email.value + password.value;
     tdna.addTarget("email");
     tdna.addTarget("password"); 
     sendPattern(text);
@@ -33,6 +33,8 @@ function sendPattern(text){
     .then((data) => {
         console.log(data);
         if (data.message_code == 10) {
+          email.value = '';
+          password.value = '';
           alert(
             "In order to verify your identity, you will be required to fill this form a couple of times."
           );
