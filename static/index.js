@@ -36,12 +36,12 @@ function sendPattern(text){
           alert(
             "In order to verify your identity, you will be required to fill this form a couple of times."
           );
-          // document.location.href = document.location.href; // reloads iframe
         } else {
           if (data.result == 1) {
             alert(
               "TypingDNA indicated that there was HIGH confidence in your login pattern"
             );
+            document.location.href = "";
           } else {
             alert(
               "TypingDNA indicated that there was LOW confidence in your login pattern"
