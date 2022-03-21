@@ -29,5 +29,26 @@ function sendPattern(text){
         credentials: 'include',
         body: JSON.stringify({pattern: pattern, user_tid: localStorage.getItem('user_tid')})
     })
-    .then((response) => console.log(response.json()))
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+        if (data.message_code == 10) {
+          alert(
+            "In order to verify your identity, you will be required to fill this form a couple of times."
+          );
+          document.location.href = document.location.href; // reloads iframe
+        } else {
+          if (data.result == 1) {
+            alert(
+              "TypingDNA indicated that there was HIGH confidence in your login pattern"
+            );
+          } else {
+            alert(
+              "TypingDNA indicated that there was LOW confidence in your login pattern"
+            );
+          }
+        //   window.location.href = "/";
+        }
+      });
+    tdna.reset();
 }
