@@ -48,6 +48,7 @@ def register():
 def sendtypingdata():
     data = request.get_json(force=True)
     print(data)
+    print(os.getenv('tpkey'))
     res = send_typing_data(data['user_tid'], data['pattern'])
     return res
 

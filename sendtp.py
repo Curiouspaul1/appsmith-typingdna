@@ -10,7 +10,6 @@ apiSecret = os.getenv('tpsecret')
 
 
 def send_typing_data(user_id, pattern):
-    print(os.getenv('tpkey'))
     print(user_id)
     print(pattern)
     authstring = f"{apiKey}:{apiSecret}"
