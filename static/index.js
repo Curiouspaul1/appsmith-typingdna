@@ -41,7 +41,7 @@ function sendPattern(text){
             alert(
               "TypingDNA indicated that there was HIGH confidence in your login pattern"
             );
-            document.location.href = "";
+            window.location.href = "";
           } else {
             alert(
               "TypingDNA indicated that there was LOW confidence in your login pattern"
