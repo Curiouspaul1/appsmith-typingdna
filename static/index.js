@@ -15,10 +15,7 @@ autocompleteDisabler.disableCopyPaste();
 const typingPatternsButton = document.getElementById("typing-patterns-btn");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
-
-const getCookieValue = (name) => (
-    document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
-)
+const id_obj = document.querySelector("#user_tid").value;
 
 typingPatternsButton.addEventListener("click", () => {
     const text = email.value + password.value;
@@ -33,11 +30,18 @@ function sendPattern(text){
         type: 1,
         text: text
     })
+    if (id_obj.length() > 0){
+      let user_tid = id_obj;
+    }
+    else {
+      let user_tid = localStorage.getItem('user_tid');
+    }
+
     fetch("/sendtypingdata", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         credentials: 'include',
-        body: JSON.stringify({pattern: pattern, user_tid: localStorage.getItem('user_tid')})
+        body: JSON.stringify({pattern: pattern, user_tid: user_tid})
     })
     .then((response) => response.json())
     .then((data) => {
