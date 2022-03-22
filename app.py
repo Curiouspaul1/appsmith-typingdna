@@ -80,6 +80,8 @@ def twofa(email):
     user = User.query.filter_by(email=email).first()
     if user:
         return render_template('index.html', user_tid=user.typing_id)
-
+    else:
+        return render_template('404.html', email=email)
+    
 if __name__ == '__main__':
     app.run()

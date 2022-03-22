@@ -50,12 +50,13 @@ function sendPattern(text){
     .then((data) => {
         console.log(data);
         if (data.message_code == 10) {
-          email.value = '';
-          password.value = '';
           alert(
             "In order to verify your identity, you will be required to fill this form a couple of times."
           );
-        } else {
+          // email.value = '';
+          // password.value = '';
+        } 
+        else {
           if (data.result == 1) {
             alert(
               "TypingDNA indicated that there was HIGH confidence in your login pattern"
@@ -66,8 +67,9 @@ function sendPattern(text){
               "TypingDNA indicated that there was LOW confidence in your login pattern"
             );
           }
-        //   window.location.href = "/";
         }
       });
     tdna.reset();
+    email.value = '';
+    password.value = '';
 }
