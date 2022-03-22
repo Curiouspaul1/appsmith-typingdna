@@ -1,6 +1,16 @@
 import { TypingDNA } from "./typingdna.js";
+import { AutocompleteDisabler } from "./autocomplete-disabler.js";
+
+// https://github.com/TypingDNA/autocomplete-disabler
 
 const tdna = new TypingDNA();
+
+const autocompleteDisabler = new AutocompleteDisabler({
+  showTypingVisualizer: true,
+  showTDNALogo: true,
+});
+autocompleteDisabler.disableAutocomplete();
+autocompleteDisabler.disableCopyPaste();
 
 const typingPatternsButton = document.getElementById("typing-patterns-btn");
 const email = document.getElementById("email");
