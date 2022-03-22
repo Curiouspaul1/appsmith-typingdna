@@ -78,6 +78,7 @@ def sendtypingdata():
 
 @app.route('/2fa')
 def twofa():
+    global user_tid
     print(user_tid)
     return render_template('index.html', user_tid=user_tid)
 
