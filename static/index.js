@@ -30,7 +30,7 @@ function sendPattern(text){
         type: 1,
         text: text
     })
-    if (id_obj.length() > 0){
+    if (id_obj.length > 0){
       let user_tid = id_obj;
     }
     else {
