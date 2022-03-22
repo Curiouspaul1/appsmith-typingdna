@@ -33,17 +33,18 @@ def register():
     try:
         db.session.add(new_user)
         db.session.commit()
-        user_tid = new_user.typing_id
-        return {
+        resp =  {
             'status': 'success',
             'msg': 'user created successfully',
             'url':  url+'/2fa'
         }, 201
     except IntegrityError:
-        return {
+        resp = {
             'status': 'error',
             'msg': 'User with email {} already exists'.format(data['email'])
         }, 400
+    user_tid = new_user.typing_id
+    return resp
 
 @app.route('/sign-in', methods=['POST'])
 def login():
