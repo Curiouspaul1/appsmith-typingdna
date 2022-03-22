@@ -16,7 +16,7 @@ const typingPatternsButton = document.getElementById("typing-patterns-btn");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const id_obj = document.querySelector("#user_tid").value;
-const payload = {};
+var payload = {};
 
 typingPatternsButton.addEventListener("click", () => {
     const text = email.value + password.value;
