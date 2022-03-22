@@ -16,6 +16,7 @@ const typingPatternsButton = document.getElementById("typing-patterns-btn");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const id_obj = document.querySelector("#user_tid").value;
+const frm = document.getElementById('typing-patterns-form');
 var payload = {};
 
 typingPatternsButton.addEventListener("click", () => {
@@ -53,8 +54,7 @@ function sendPattern(text){
           alert(
             "In order to verify your identity, you will be required to fill this form a couple of times."
           );
-          // email.value = '';
-          // password.value = '';
+          frm.reset();
         } 
         else {
           if (data.result == 1) {
@@ -70,6 +70,4 @@ function sendPattern(text){
         }
       });
     tdna.reset();
-    email.value = '';
-    password.value = '';
 }
