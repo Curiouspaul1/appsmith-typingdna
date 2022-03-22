@@ -16,7 +16,7 @@ const typingPatternsButton = document.getElementById("typing-patterns-btn");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const id_obj = document.querySelector("#user_tid").value;
-const payload;
+const payload = {};
 
 typingPatternsButton.addEventListener("click", () => {
     const text = email.value + password.value;
@@ -39,7 +39,7 @@ function sendPattern(text){
       console.log(id_obj.length);
       payload = {pattern: pattern, user_tid: localStorage.getItem('user_tid')};
     }
-
+    console.log(payload);
     fetch("/sendtypingdata", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
