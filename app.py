@@ -21,8 +21,8 @@ db = SQLAlchemy(app)
 from models import *
 db.create_all()
 
-url = ''
-user_tid = ''
+# url = ''
+# user_tid = ''
 
 @app.route('/sign-up', methods=['POST'])
 def register():
@@ -35,15 +35,13 @@ def register():
         db.session.commit()
         resp =  {
             'status': 'success',
-            'msg': 'user created successfully',
-            'url':  url+'/2fa'
+            'msg': 'user created successfully'
         }, 201
     except IntegrityError:
         resp = {
             'status': 'error',
             'msg': 'User with email {} already exists'.format(data['email'])
         }, 400
-    user_tid = new_user.typing_id
     return resp
 
 @app.route('/sign-in', methods=['POST'])
@@ -62,7 +60,6 @@ def login():
             'status': 'error',
             'msg': f"Password incorrect"
         }, 401
-    user_tid = user.typing_id
     return {
         'status': 'success',
         'msg': 'Logged in successful'
@@ -77,12 +74,12 @@ def sendtypingdata():
     return res
 
 
-@app.route('/2fa')
-def twofa():
-    global user_tid
-    print(user_tid)
-    return render_template('index.html', user_tid=user_tid)
-
+@app.route('/2fa/<email>')
+def twofa(email):
+    # find user with email
+    user = User.query.filter_by(email=email).first()
+    if user:
+        return render_template('index.html', user_tid=user.typing_id)
 
 if __name__ == '__main__':
     app.run()
