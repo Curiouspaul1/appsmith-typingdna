@@ -34,6 +34,8 @@ function sendPattern(text){
       let user_tid = id_obj;
     }
     else {
+      console.log(id_obj);
+      console.log(id_obj.length);
       let user_tid = localStorage.getItem('user_tid');
     }
 
