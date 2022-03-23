@@ -7,8 +7,6 @@ from flask_cors import CORS
 from sendtp import send_typing_data
 import os
 
-load_dotenv()
-
 base_dir = os.path.abspath(os.getcwd())
 
 app = Flask(__name__)
@@ -21,13 +19,9 @@ db = SQLAlchemy(app)
 from models import *
 db.create_all()
 
-# url = ''
-# user_tid = ''
 
 @app.route('/sign-up', methods=['POST'])
 def register():
-    global url
-    global user_tid
     data = request.get_json(force=True)
     new_user = User(data)
     try:
@@ -46,7 +40,6 @@ def register():
 
 @app.route('/sign-in', methods=['POST'])
 def login():
-    global user_tid
     data = request.get_json(force=True)
     # find user
     user = User.query.filter_by(email=data['email']).first()
@@ -68,8 +61,6 @@ def login():
 @app.route('/sendtypingdata', methods=['POST'])
 def sendtypingdata():
     data = request.get_json(force=True)
-    print(data)
-    print(os.getenv('tpkey'))
     res = send_typing_data(data['user_tid'], data['pattern'])
     return res
 
