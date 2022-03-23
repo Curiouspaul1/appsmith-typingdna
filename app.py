@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash
-from dotenv import load_dotenv
 from flask_cors import CORS
 from sendtp import send_typing_data
 import os
